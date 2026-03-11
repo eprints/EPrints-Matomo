@@ -743,7 +743,6 @@ sub _bulk_ping
 	# Turn into payload JSON string.
 	my $json    = JSON->new->utf8->allow_nonref(0)->canonical(1)->pretty(0);
 	my $content = $json->encode($payload);
-
 	my $response = $self->_user_agent->post(
 		$tracker_url,
 		Content_Type => 'application/json',
@@ -1009,8 +1008,6 @@ sub _ping
 	my ( $self, $access, $request_url ) = @_;
 	my $repo = $self->{repository};
 
-	my $tracker_url = URI->new( $repo->config( 'oaping', 'tracker' ) );
-
 	# Convert access to form data:
 	my %qf_params = $self->_as_form( $access, $request_url );
 	return unless %qf_params;
@@ -1046,9 +1043,7 @@ sub _ping
 		}
 	}
 
-	$tracker_url->query_form(%qf_params);
-
-	my $response = $self->_user_agent->head($tracker_url);
+	my $response = $self->_user_agent->post($repo->config( 'oaping', 'tracker' ), \%qf_params);
 	my $error;
 	my %err_details;
 	if (   $response->header('Client-Warning')
@@ -1088,7 +1083,6 @@ sub _stash
 	my ( $self, $access, $request_url ) = @_;
 	$request_url //= q();
 	my $repo = $self->{repository};
-	print STDERR "OAPing: Stashing $request_url\n";
 	my $panic_msg =
 		"_stash: Could not stash ping for access "
 	  . $access->id . " = "
