@@ -2,7 +2,7 @@
 
 *Alternative EPrints extension for sending usage pings to the Matomo tracking API (OpenAIRE uses Matomo)*
 
-This is a fork and major refactor of the work by Alex Ball: https://github.com/alex-ballEPrints-OAPing/
+This is a fork and major refactor of the work by Alex Ball: https://github.com/alex-ball/EPrints-OAPing/
 
 Changes from EPrints-OAPing:
  - Only bulk uploads, no live pings
