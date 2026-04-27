@@ -10,6 +10,8 @@ Changes from EPrints-OAPing:
  - Minimal setup required to upload historic access data
  - Improved detection of errors from Matomo
 
+Note that this only pushes EPrint and document views and downloads to Matomo.
+
 ## Installation
 
 You can install this as an ingredient that you can then load into archives on a flavour-by-flavour basis;
