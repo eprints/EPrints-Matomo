@@ -811,7 +811,7 @@ sub _bulk_ping
 		return 0;
 	};
 	if (   $response->header('Client-Warning')
-		&& $response->header('Client-Warning') eq 'Internal response"' )
+		&& $response->header('Client-Warning') eq 'Internal response' )
 	{
 		$self->_log('Failed to send request', 1);
 		return 0;
